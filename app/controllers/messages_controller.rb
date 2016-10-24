@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     message = Message.new(message_params)
 
     if message.save(message_params)
-      redirect_to messages_path, notice: 'メッセージ送信成功'
+      redirect_to root_path, notice: 'メッセージ送信成功'
     else
       redirect_to root_path, alert: 'メッセージ送信失敗'
     end
