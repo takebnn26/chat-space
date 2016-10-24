@@ -9,6 +9,7 @@
   %body
     .layout-notification
       .chat
+        = render 'layouts/flash'
         .chat-side
           .chat-user.clearfix
             %h5 hayato
@@ -25,28 +26,4 @@
                 %p.chat-group__message
                   test
         .chat-main
-          .chat-header.clearfix
-            .chat-header--left
-              %h2 take
-              %p.chat-header__users
-                %span.chat-header__user hayato
-            .chat-header--right
-              %a.chat-header__edit-btn{ href: '#' } Edit
-          .chat-body
-            %ul.chat-messages
-              %li.chat-message
-                .chat-message__header.cleafix
-                  %p.chat-message__name hayato
-                  %p.chat-message__time 2016/10/20 02:34:50
-                %p.chat-message__body はんぱねえ
-          .chat-footer
-            %form.new_message#new_message
-              %input{ type: "hidden", value: "" }
-              %input{ type: "hidden", name: "authenticity_token" }
-              .chat-footer__body
-                %textarea{ rows: '1', placeholder: 'type a message', name: 'message[body]', id: 'message_body' }
-                %label.chat-footer__file
-                  %input#message_image{ type: "file", name: "message[image]" }
-                  %i.fa.fa-image
-              %input{ type: "submit", name: "commit", value: "Send" }
-
+          = yield

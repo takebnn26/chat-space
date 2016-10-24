@@ -7,6 +7,20 @@
   min-width: 980px;
   height: 100vh;
 
+  .notice {
+    background-color: #A5F4B3;
+    color: #fff;
+    text-align: center;
+    float: center;
+  }
+
+  .alert {
+    background-color: #FFB3AD;
+    color: #fff;
+    text-align: center;
+    float: center;
+  }
+
   .chat-side {
     float: left;
     width: 300px;
