@@ -7,23 +7,4 @@
     = stylesheet_link_tag    'application', media: 'all', data: { turbolinks: { track: 'reload' }}
     = javascript_include_tag 'application', data: { turbolinks: {track: 'reload'}}
   %body
-    .layout-notification
-      .chat
-        = render 'layouts/flash'
-        .chat-side
-          .chat-user.clearfix
-            %h5 hayato
-            .chat-user__actions
-              %a.chat-user__action{ href: '#' }
-                %i.fa.fa-pencil-square-o
-              %a.chat-user__action{ href: '#' }
-                %i.fa.fa-cog
-          %ul.chat-groups
-            %li.chat-group
-              %a.chat-group__link{ href: '#' }
-                %p.chat-group__name
-                  takeb
-                %p.chat-group__message
-                  test
-        .chat-main
-          = yield
+    = yield
