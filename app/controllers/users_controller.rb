@@ -4,11 +4,9 @@ class UsersController < ApplicationController
   before_action -> {comfirm_user(@user)}
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
 
     if @user.update_with_password(user_params)
       redirect_to root_path, notice: "ユーザーの情報を更新しました。"
