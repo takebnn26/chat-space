@@ -12,23 +12,23 @@
             .field-label
               = f.label 'Name'
             .field-input
-              = f.text_field :name, autofocus: true, value: "#{@user.name}", id: 'user_name'
+              = f.text_field :name, autofocus: true, id: 'user_name'
           .field
             .field-label
               = f.label 'メールアドレス'
             .field-input
-              = f.email_field :email, value: "#{@user.email}", id: 'user_email'
+              = f.email_field :email, id: 'user_email'
           .field
             .field-label
               = f.label 'パスワード'
             .field-input
-              = f.password_field :password, value: "#{@user.password}"
+              = f.password_field :password
           .field
             .field-label
               = f.label '確認用パスワード'
               %i (変更したくない場合は、空白のままにしておいてください）
             .field-input
-              = f.password_field :password_confirmation, value: "#{@user.password}"
+              = f.password_field :password_confirmation
           .field
             .field-label
               = f.label '現在のパスワード'

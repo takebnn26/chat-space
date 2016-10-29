@@ -13,7 +13,8 @@ class UsersController < ApplicationController
     if @user.update_with_password(user_params)
       redirect_to root_path, notice: "ユーザーの情報を更新しました。"
     else
-      render edit_user_path(@user), alert: "ユーザーの情報更新に失敗しました。"
+      flash[:alert] = "ユーザーの情報更新に失敗しました。"
+      render :edit
     end
 
   end
