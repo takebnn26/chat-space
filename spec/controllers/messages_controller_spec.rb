@@ -12,7 +12,7 @@ describe MessagesController, type: :controller do
     it "renders the :index template" do
       get :index
     end
-    
+
   end
 
   describe 'POST #create' do
