@@ -1,0 +1,39 @@
+.layout-notification
+  #account-page.account-page
+    .account-page__inner.clearfix
+      .account-page__inner--left.account-page__header
+        %h2 Edit Account
+        %h5 アカウントの編集
+        = link_to 'ログアウト', destroy_user_session_path, method: :delete, rel: 'nofollow', class: 'btn'
+        = link_to 'トッップページに戻る', root_path, class: 'btn'
+      .account-page__inner--right.user-form
+        = form_for (@user),method: :patch, accept: {charset: 'UTF-8'}, id: 'edit-user', class: 'edit_user' do |f|
+          .field
+            .field-label
+              = f.label 'Name'
+            .field-input
+              = f.text_field :name, autofocus: true, id: 'user_name'
+          .field
+            .field-label
+              = f.label 'メールアドレス'
+            .field-input
+              = f.email_field :email, id: 'user_email'
+          .field
+            .field-label
+              = f.label 'パスワード'
+            .field-input
+              = f.password_field :password
+          .field
+            .field-label
+              = f.label '確認用パスワード'
+              %i (変更したくない場合は、空白のままにしておいてください）
+            .field-input
+              = f.password_field :password_confirmation
+          .field
+            .field-label
+              = f.label '現在のパスワード'
+              %i (変更には現在のパスワードの入力が必要です)
+            .field-input
+              = f.password_field :current_password
+          .actions
+            = f.submit 'update', class: 'btn'
