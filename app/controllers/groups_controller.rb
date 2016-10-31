@@ -4,12 +4,14 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    @users = User.all.where.not(id: current_user.id)
   end
 
   def create
     @group = Group.new(group_params)
 
     if @group.save
+      GroupUser.create(user_id: current_user.id, group_id: @group.id)
       redirect_to group_path(@group), notice: '新規グループを作成しました'
     else
       flash[:alert] = '新規グループ作成に失敗しました'
@@ -22,24 +24,18 @@ class GroupsController < ApplicationController
   end
 
   def update
-    @group = Group.find(params[:id])
 
-    if @group.users.include?(current_user)
-      if @group.update(group_params)
-        redirect_to group_path(@group), notice: 'グループ情報を更新しました'
-      else
-        flash[:alert] = 'グループ情報更新に失敗しました'
-        render :edit
-      end
+    if @group.update(group_params)
+      redirect_to group_path(@group), notice: 'グループ情報を更新しました'
     else
-      redirect_to group_path(@group), alert: '更新を許可されていません'
+      redirect_to edit_group_path(@group), alert: 'グループ情報更新に失敗しました'
     end
 
   end
 
   def show
     @message = Message.new
-    @groups = current_user.groups.all
+    @groups = current_user.groups
   end
 
   private
