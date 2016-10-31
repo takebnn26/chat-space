@@ -4,9 +4,12 @@
     .chat-main
       .chat-header.clearfix
         .chat-header--left
-          %h2 take
+          %h2= @group.name
           %p.chat-header__users
-            %span.chat-header__user hayato
+            Members:
+            - @group.users.each do |user|
+              %span.chat-header__user
+                = user.name
         .chat-header--right
           = link_to 'Edit', edit_group_path(@group), class: 'chat-header__edit-btn'
       .chat-body
@@ -14,7 +17,8 @@
           - @group.messages.each do |message|
             %li.chat-message
               .chat-message__header.cleafix
-                %p.chat-message__name hayato
+                %p.chat-message__name
+                  = message.user.name
                 %p.chat-message__time
                   = message.created_at.to_s(:default)
               %p.chat-message__body
