@@ -1,6 +1,7 @@
 @import "./reset";
 @import "./clearfix";
 @import "./user";
+@import "./group";
 @import "font-awesome";
 
 .chat {
@@ -30,9 +31,6 @@
 
       .chat-user__actions {
         float: right;
-        a {
-          text-decoration: none;
-        }
 
         .chat-user__action {
           display: inline-block;
@@ -40,6 +38,7 @@
           line-height: 28px;
           color: #fff;
           font-size: 20px;
+          text-decoration: none;
 
           .fa {
             display: inline-block;
@@ -260,10 +259,4 @@
     text-align: center;
     float: center;
   }
-
-
-
-
-
-
 
