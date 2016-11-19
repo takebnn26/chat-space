@@ -13,4 +13,4 @@
           %p.chat-group__name
             = group.name
           %p.chat-group__message
-            = group.messages.last.content if group.messages.present?
+            = group.has_message?

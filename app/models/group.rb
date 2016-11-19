@@ -6,6 +6,9 @@ class Group < ApplicationRecord
 
   validates :name, presence: true
 
-  accepts_nested_attributes_for :users
+
+  def has_message?
+    messages.present? ? messages.last.content : 'まだメッセージはありません'
+  end
 
 end
