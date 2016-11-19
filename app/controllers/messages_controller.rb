@@ -8,13 +8,23 @@ class MessagesController < ApplicationController
   end
 
   def create
-
-    message = @group.messages.new(message_params)
-
-    if message.save(message_params)
-      redirect_to group_messages_path(@group), notice: 'メッセージ送信成功'
+    message = current_user.messages.new(message_params)
+    if message.save
+      respond_to do |format|
+        format.html do
+          redirect_to group_messages_path(@group), notice: 'メッセージ送信成功'
+        end
+        format.json do
+          render json: {
+                          content:  message.content,
+                          name:     message.user.name,
+                          date:     message.created_at.strftime('%Y/%m/%d %H:%M:%S'),
+                          notice:   'メッセージ送信成功',
+                        }
+        end
+      end
     else
-      redirect_to group_messages_path(@group), alert: 'メッセージ送信失敗'
+      redirect_to group_messages_path(@group)
     end
 
   end
@@ -22,7 +32,7 @@ class MessagesController < ApplicationController
   private
 
    def message_params
-    params.require(:message).permit(:content, :user_id)
+    params.require(:message).permit(:content).merge(group_id: params[:group_id])
    end
 
    def set_group
