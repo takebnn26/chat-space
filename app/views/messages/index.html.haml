@@ -16,7 +16,7 @@
         %ul.chat-messages
           - @group.messages.each do |message|
             %li.chat-message
-              .chat-message__header.cleafix
+              .chat-message__header.clearfix
                 %p.chat-message__name
                   = message.user.name
                 %p.chat-message__time
@@ -25,11 +25,10 @@
                 = message.content
       .chat-footer
         .new_message#new_message
-          = form_for [@group ,@message] do |f|
-            = f.hidden_field :user_id, value: current_user.id
+          = form_for [@group ,@message], html: { id: 'new_message_form' } do |f|
             .chat-footer__body
               = f.text_area :content, rows: '1', placeholder: 'type a message'
               %label.chat-footer__file
                 = f.file_field :image
                 %i.fa.fa-image
-            = f.submit 'Send'
+            = f.submit 'Send', id: 'new_message_submit'
