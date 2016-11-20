@@ -6,4 +6,9 @@ class Group < ApplicationRecord
 
   validates :name, presence: true
 
+
+  def last_message
+    messages.present? ? messages.last.content : 'まだメッセージはありません'
+  end
+
 end

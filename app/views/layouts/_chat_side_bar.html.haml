@@ -9,8 +9,8 @@
   %ul.chat-groups
     - @groups.each do |group|
       %li.chat-group
-        = link_to group_path(group), class: 'chat-group__link' do
+        = link_to group_messages_path(group), class: 'chat-group__link' do
           %p.chat-group__name
             = group.name
           %p.chat-group__message
-            = group.messages.last.content if group.messages.present?
+            = group.last_message
