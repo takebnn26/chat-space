@@ -1,6 +1,10 @@
 .chat-group-form
-  %h1 新規チャットグループ
-  = form_for (@group), class: 'new_chat_group', id: 'new_chat_group_22', accept: {charset: 'UTF-8'} do |f|
+  %h1
+    - if current_page?(new_group_path)
+      新規チャットグループ
+    - else
+      チャットグループ編集
+  = form_for (@group), class: 'new_chat_group' do |f|
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
         = f.label 'グループ名', class: 'chat-group-form__label'

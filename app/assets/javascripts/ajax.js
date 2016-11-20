@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', function(){
     $('.chat-messages').append(html);
   };
 
-  $('#new_message').on('submit', function(e) {
+  $('#new_message_submit').on('click', function(e) {
 
     e.preventDefault();
     $.ajax({
@@ -29,12 +29,9 @@ $(document).on('turbolinks:load', function(){
     .done(function(data) {
       flashMessage(data);
       insertHtml(data);
-      console.log(data);
       $('#message_content').val('');
-      $('#new_message_form')[0].reset();
     })
     .fail(function(data) {
-      console.log('失敗');
       alert('エラーが発生しました')
     });
   });
