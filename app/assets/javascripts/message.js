@@ -1,8 +1,17 @@
 $(document).on('turbolinks:load', function(){
+
   function flashMessage(data) {
     var flash = $("<div class='notice'>" + data.notice + "</div>");
     $('body').prepend(flash);
   };
+
+  function scrollBottom() {
+    var pos = $(".chat-messages").height();
+    $(".chat-body").animate({
+      scrollTop: pos
+    }, "slow", "swing");
+  };
+
   function insertHtml(data){
     var html = $(
                 "<li class='chat-message'>" +
@@ -30,6 +39,7 @@ $(document).on('turbolinks:load', function(){
       flashMessage(data);
       insertHtml(data);
       $('#message_content').val('');
+      scrollBottom();
     })
     .fail(function(data) {
       alert('エラーが発生しました')
