@@ -6,7 +6,10 @@ $(document).on('turbolinks:load', function(){
   };
 
   function scrollBottom() {
-    $(".chat-body").scrollTop($('.chat-messages').height());
+    var pos = $(".chat-messages").height();
+    $(".chat-body").animate({
+      scrollTop: pos
+    }, "slow", "swing");
   };
 
   function insertHtml(data){
@@ -36,7 +39,7 @@ $(document).on('turbolinks:load', function(){
       flashMessage(data);
       insertHtml(data);
       $('#message_content').val('');
-      scrollBottom()
+      scrollBottom();
     })
     .fail(function(data) {
       alert('エラーが発生しました')
