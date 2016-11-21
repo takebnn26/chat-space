@@ -6,14 +6,7 @@ $(document).on('turbolinks:load', function(){
   };
 
   function scrollBottom() {
-    var target = $("<li id='target'></li>");
-    $(".chat-messages").append(target);
-    var sh = $(".chat-messages").scrollTop()
-    var th = $('#target').offset().top;
-    var pos = th + sh;
-    $(".chat-body").animate({
-      scrollTop: pos
-    }, "slow", "swing");
+    $(".chat-body").scrollTop($('.chat-messages').height());
   };
 
   function insertHtml(data){
@@ -43,7 +36,7 @@ $(document).on('turbolinks:load', function(){
       flashMessage(data);
       insertHtml(data);
       $('#message_content').val('');
-      scrollBottom();
+      scrollBottom()
     })
     .fail(function(data) {
       alert('エラーが発生しました')
