@@ -6,7 +6,11 @@ $(document).on('turbolinks:load', function(){
                 "<div class='chat-group-user users_list clearfix'>" +
                   "<p class='chat-group-users__name'>" +
                     name +
-                    "<a class='user-search-add add_users chat-group-user__btn chat-group-user__btn--add' data-user-id=" + id + " data-user-name=" + name + ">追加" +
+                    "<a class='user-search-add add_users \
+                      chat-group-user__btn chat-group-user__btn--add' \
+                        data-user-id="   + id   +
+                      " data-user-name=" + name +
+                      ">追加" +
                     "</a>" +
                   "</p>" +
                 "</div>"
@@ -39,15 +43,15 @@ $(document).on('turbolinks:load', function(){
       url:      '/groups/search',
       type:     'GET',
       dataType: 'json',
-      data:     ( "keyword=" + input )
+      data:     { keyword:  input }
     })
 
     .done(function(data) {
       $('.users_list').remove();
       $.each(data, function(i, user) {
-        $(result).append(insertUsersList(user.id, user.name));
+        result.append(insertUsersList(user.id, user.name));
       });
-      $(result).appendTo($('.chat-group-form__search'));
+      result.appendTo($('.chat-group-form__search'));
     })
 
     .fail(function(data) {
@@ -65,10 +69,9 @@ $(document).on('turbolinks:load', function(){
 
 //追加ボタンを押した時のイベント
   $("#user-search-result").on("click", ".add_users", function() {
-    var $this = $(this);
-    var id = $this.data("userId");
-    var name = $this.data("userName");
-    $this.parents(".users_list").remove();
+    var id = $(this).data("userId");
+    var name = $(this).data("userName");
+    $(this).parents(".users_list").remove();
     $("#chat-group-users").append(appendUser(id, name));
   });
 
