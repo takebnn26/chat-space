@@ -57,14 +57,14 @@ $(document).on('turbolinks:load', function(){
 
 
 //削除ボタンを押した時のイベント
-  $(document).on("click", ".remove_users", function() {
+  $("#chat-group-users").on("click", ".remove_users", function() {
     var $this = $(this);
     $this.parents(".remove_list").remove();
   });
 
 
 //追加ボタンを押した時のイベント
-  $(document).on("click", ".add_users", function() {
+  $("#user-search-result").on("click", ".add_users", function() {
     var $this = $(this);
     var id = $this.data("userId");
     var name = $this.data("userName");
