@@ -62,8 +62,7 @@ $(document).on('turbolinks:load', function(){
 
 //削除ボタンを押した時のイベント
   $("#chat-group-users").on("click", ".remove_users", function() {
-    var $this = $(this);
-    $this.parents(".remove_list").remove();
+    $(this).parents(".remove_list").remove();
   });
 
 
