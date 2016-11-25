@@ -9,12 +9,10 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
     @group.users << current_user
-    @users = User.all.where.not(id: current_user.id)
   end
 
   def create
     @group = Group.new(group_params)
-    @group.users << current_user
 
     if @group.save
       redirect_to group_path(@group), notice: '新規グループを作成しました'
@@ -25,7 +23,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @users = User.all.where.not(id: current_user.id)
+    @users = @group.users.where.not(id: current_user.id)
   end
 
   def update

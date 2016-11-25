@@ -22,10 +22,14 @@
         = f.label 'チャットメンバー', class: 'chat-group-form__label'
       .chat-group-form__field--right
         #chat-group-users
-          #chat-group-user-22.chat-group-user.clearfix
-            - @group.users.each do |user|
-              %p.chat-group-user__name
+          - @group.users.each do |user|
+            .chat-group-user.remove_list.clearfix
+              %input{ type: "hidden", name: "group[user_ids][]", value: user.id }
+              %p.chat-group-users__name
                 = user.name
+                - unless user.id == current_user.id
+                  %a.user-search-remove.remove_users.chat-group-user__btn.chat-group-user__btn--remove
+                    削除
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
       .chat-group-form__field--right
