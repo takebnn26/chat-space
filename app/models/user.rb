@@ -10,4 +10,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  def self.incremental_search(keyword, current_user)
+    where('name LIKE(?)', "#{keyword}%").where.not(id: current_user.id)
+  end
+
 end

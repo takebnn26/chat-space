@@ -248,6 +248,18 @@
   }
 }
 
+.chat-group-user {
+  @include clearfix();
+  padding: 0 15px;
+  line-height: 50px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+
+  a {
+    float: right;
+  }
+}
+
 .notice {
     background-color: #A5F4B3;
     color: #fff;

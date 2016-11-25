@@ -9,24 +9,21 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
     @group.users << current_user
-    @users = User.all.where.not(id: current_user.id)
   end
 
   def create
     @group = Group.new(group_params)
-    @group.users << current_user
 
     if @group.save
       redirect_to group_path(@group), notice: '新規グループを作成しました'
     else
-      flash[:alert] = '新規グループ作成に失敗しました'
-      render :new
+      redirect_to new_group_path, alert: '新規グループ作成に失敗しました'
     end
 
   end
 
   def edit
-    @users = User.all.where.not(id: current_user.id)
+    @users = @group.users.where.not(id: current_user.id)
   end
 
   def update
@@ -41,6 +38,15 @@ class GroupsController < ApplicationController
 
   def show
     @groups = current_user.groups
+  end
+
+  def search
+    users = User.incremental_search(params[:keyword], current_user)
+    respond_to do |format|
+      format.html
+      format.json { render json: users }
+    end
+
   end
 
   private

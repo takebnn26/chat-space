@@ -1,0 +1,7 @@
+.chat-group-user.remove_list.clearfix
+  %input{ type: 'hidden', name: 'group[user_ids][]', value: user.id }
+  %p.chat-group-users__name
+    = user.name
+    - unless user.id == current_user.id
+      %a.user-search-remove.remove_users.chat-group-user__btn.chat-group-user__btn--remove
+        削除
