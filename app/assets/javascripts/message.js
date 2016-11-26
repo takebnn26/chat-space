@@ -22,8 +22,7 @@ $(document).on('turbolinks:load', function(){
     } else {
       var insertImage = "";
     };
-    var html = $(
-                "<li class='chat-message'>" +
+    var html = "<li class='chat-message'>" +
                   "<div class='chat-message__header clearfix'>" +
                     "<p class='chat-message__name'>" +
                     data.name + "</p>" +
@@ -32,7 +31,6 @@ $(document).on('turbolinks:load', function(){
                   "<p class='chat-message__body'>" +
                   data.content +
                   "</p>" + insertImage + "</li>"
-                );
     $('.chat-messages').append(html);
   };
 
