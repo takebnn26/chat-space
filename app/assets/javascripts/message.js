@@ -15,7 +15,13 @@ $(document).on('turbolinks:load', function(){
     }, "slow", "swing");
   };
 
+//メッセージのHTML挿入
   function insertHtml(data){
+    if (data.image){
+      var insertImage = "<br><img src='" + data.image + "' class='message_img'>"
+    } else {
+      var insertImage = "";
+    };
     var html = $(
                 "<li class='chat-message'>" +
                   "<div class='chat-message__header clearfix'>" +
@@ -24,24 +30,38 @@ $(document).on('turbolinks:load', function(){
                     "<p class='chat-message__time'>" +
                     data.date + "</p></div>" +
                   "<p class='chat-message__body'>" +
-                  data.content + "</p></li>"
+                  data.content +
+                  "</p>" + insertImage + "</li>"
                 );
     $('.chat-messages').append(html);
   };
 
+//image選択時、自動投稿
+  $('#new_image').on('change', function(){
+    $('#new_message_submit').click();
+  });
+
+//メッセージ投稿時、ajax通信
   $('#new_message_submit').on('click', function(e) {
 
     e.preventDefault();
+
+    var $form = $('form#new_message_form').get(0);
+    var fd = new FormData($form);
+
     $.ajax({
       url: './messages',
       type: 'POST',
-      data: { message: { content: $('#message_content').val() }},
-      dataType: 'json'
+      data: fd,
+      dataType: 'json',
+      processData: false,
+      contentType: false
     })
     .done(function(data) {
       flashMessage(data);
       insertHtml(data);
       $('#message_content').val('');
+      $('#new_image').val('');
       scrollBottom();
     })
     .fail(function(data) {

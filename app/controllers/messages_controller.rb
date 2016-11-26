@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+
     message = current_user.messages.new(message_params)
     if message.save
       respond_to do |format|
@@ -19,6 +20,7 @@ class MessagesController < ApplicationController
                           content:  message.content,
                           name:     message.user.name,
                           date:     message.created_at.strftime('%Y/%m/%d %H:%M:%S'),
+                          image:    message.image.url,
                           notice:   'メッセージ送信成功',
                         }
         end
@@ -32,7 +34,7 @@ class MessagesController < ApplicationController
   private
 
    def message_params
-    params.require(:message).permit(:content).merge(group_id: params[:group_id])
+    params.require(:message).permit(:content, :image).merge(group_id: params[:group_id])
    end
 
    def set_group
