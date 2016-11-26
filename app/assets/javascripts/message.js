@@ -1,10 +1,13 @@
 $(document).on('turbolinks:load', function(){
 
+//フラッシュメッセージ表示
   function flashMessage(data) {
+    $('.notice').remove();
     var flash = $("<div class='notice'>" + data.notice + "</div>");
     $('body').prepend(flash);
   };
 
+//メッセージ投稿時、最下部へスクロール
   function scrollBottom() {
     var pos = $(".chat-messages").height();
     $(".chat-body").animate({
