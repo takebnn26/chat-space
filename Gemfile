@@ -18,9 +18,10 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem 'font-awesome-rails'
 
-#画像投稿
+#画像投稿&ストレージ
 gem 'carrierwave'
 gem 'rmagick'
+gem 'fog'
 
 #ユーザー管理
 gem 'devise'
