@@ -5,7 +5,7 @@ class Message < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  def tojson
+  def change_json
     {
       content:  content,
       name:     user.name,

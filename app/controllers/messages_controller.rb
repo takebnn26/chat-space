@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     respond_to do |format|
       format.html
-      format.json { render json: @group.messages.includes(:user).map(&:tojson)}
+      format.json { render json: @group.messages.includes(:user).map(&:change_json)}
     end
   end
 
@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
           redirect_to group_messages_path(@group), notice: 'メッセージ送信成功'
         end
         format.json do
-          render json: message.tojson
+          render json: message.change_json
         end
       end
     else
