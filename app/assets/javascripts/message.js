@@ -68,7 +68,7 @@ $(document).on('turbolinks:load', function(){
   });
 
 //setintervalをメッセージ機能につける
-  setInterval(reloadMessages, 10000);
+  setInterval(reloadedMessages, 10000);
 
   function reloadedMessages() {
     $.ajax({
