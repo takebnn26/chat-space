@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
 //フラッシュメッセージ表示
   function flashMessage(data) {
     $('.notice').remove();
-    var flash = $("<div class='notice'>" + data.notice + "</div>");
+    var flash = $("<div class='notice'>メッセージ送信成功messe-jisousinnseikou</div>");
     $('body').prepend(flash);
   };
 
