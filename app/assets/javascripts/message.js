@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
 //フラッシュメッセージ表示
   function flashMessage(data) {
     $('.notice').remove();
-    var flash = $("<div class='notice'>メッセージ送信成功messe-jisousinnseikou</div>");
+    var flash = $("<div class='notice'>メッセージ送信成功</div>");
     $('body').prepend(flash);
   };
 
@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function(){
   };
 
 //メッセージのHTML挿入
-  function insertHtml(data){
+  function insertedHtml(data){
     if (data.image){
       var insertImage = "<br><img src='" + data.image + "' class='message_img'>"
     } else {
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function(){
     })
     .done(function(data) {
       flashMessage(data);
-      $('.chat-messages').append(insertHtml(data));
+      $('.chat-messages').append(insertedHtml(data));
       $('#message_content').val('');
       $('#new_image').val('');
       scrollBottom();
@@ -70,14 +70,13 @@ $(document).on('turbolinks:load', function(){
 //setintervalをメッセージ機能につける
   setInterval(reloadMessages, 10000);
 
-  function reloadMessages() {
+  function reloadedMessages() {
     $.ajax({
       url: './messages',
       type: 'GET',
       dataType: 'json'
     })
     .done(function(data) {
-      console.log(data);
       var reloadHtml = '';
       data.forEach(function (data) {
         reloadHtml += insertHtml(data);
