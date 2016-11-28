@@ -68,18 +68,18 @@ $(document).on('turbolinks:load', function(){
   });
 
 //setintervalをメッセージ機能につける
-  setInterval(reloadedMessages, 10000);
+  setInterval(reloadMessages, 10000);
 
-  function reloadedMessages() {
+  function reloadMessages() {
     $.ajax({
       url: './messages',
       type: 'GET',
       dataType: 'json'
     })
     .done(function(data) {
-      var reloadHtml = '';
+      var reloadedHtml = '';
       data.forEach(function (data) {
-        reloadHtml += insertHtml(data);
+        reloadedHtml += insertHtml(data);
       });
 
       $('.chat-messages').append(reloadHtml);
