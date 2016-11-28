@@ -5,6 +5,10 @@ class MessagesController < ApplicationController
   def index
     @groups = current_user.groups
     @message = Message.new
+    respond_to do |format|
+      format.html
+      format.json { render json: @group.messages.includes(:user).map(&:change_json)}
+    end
   end
 
   def create
@@ -16,13 +20,7 @@ class MessagesController < ApplicationController
           redirect_to group_messages_path(@group), notice: 'メッセージ送信成功'
         end
         format.json do
-          render json: {
-                          content:  message.content,
-                          name:     message.user.name,
-                          date:     message.created_at.strftime('%Y/%m/%d %H:%M:%S'),
-                          image:    message.image.url,
-                          notice:   'メッセージ送信成功',
-                        }
+          render json: message.change_json
         end
       end
     else

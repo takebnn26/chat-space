@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function(){
 //フラッシュメッセージ表示
   function flashMessage(data) {
     $('.notice').remove();
-    var flash = $("<div class='notice'>" + data.notice + "</div>");
+    var flash = $("<div class='notice'>メッセージ送信成功</div>");
     $('body').prepend(flash);
   };
 
@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function(){
   };
 
 //メッセージのHTML挿入
-  function insertHtml(data){
+  function insertedHtml(data){
     if (data.image){
       var insertImage = "<br><img src='" + data.image + "' class='message_img'>"
     } else {
@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', function(){
                   "<p class='chat-message__body'>" +
                   data.content +
                   "</p>" + insertImage + "</li>"
-    $('.chat-messages').append(html);
+    return html
   };
 
 //image選択時、自動投稿
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function(){
     })
     .done(function(data) {
       flashMessage(data);
-      insertHtml(data);
+      $('.chat-messages').append(insertedHtml(data));
       $('#message_content').val('');
       $('#new_image').val('');
       scrollBottom();
@@ -66,4 +66,25 @@ $(document).on('turbolinks:load', function(){
       alert('エラーが発生しました')
     });
   });
+
+//setintervalをメッセージ機能につける
+  setInterval(reloadMessages, 10000);
+
+  function reloadMessages() {
+    $.ajax({
+      url: './messages',
+      type: 'GET',
+      dataType: 'json'
+    })
+    .done(function(data) {
+      var reloadedHtml = '';
+      data.forEach(function (data) {
+        reloadedHtml += insertHtml(data);
+      });
+
+      $('.chat-messages').append(reloadHtml);
+      scrollBottom();
+    })
+  };
+
 });
