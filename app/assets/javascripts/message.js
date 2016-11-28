@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', function(){
                   "<p class='chat-message__body'>" +
                   data.content +
                   "</p>" + insertImage + "</li>"
-    $('.chat-messages').append(html);
+    return html
   };
 
 //image選択時、自動投稿
@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', function(){
     })
     .done(function(data) {
       flashMessage(data);
-      insertHtml(data);
+      $('.chat-messages').append(insertHtml(data));
       $('#message_content').val('');
       $('#new_image').val('');
       scrollBottom();
