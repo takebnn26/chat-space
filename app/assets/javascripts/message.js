@@ -66,4 +66,26 @@ $(document).on('turbolinks:load', function(){
       alert('エラーが発生しました')
     });
   });
+
+//setintervalをメッセージ機能につける
+  setInterval(reloadMessages, 10000);
+
+  function reloadMessages() {
+    $.ajax({
+      url: './messages',
+      type: 'GET',
+      dataType: 'json'
+    })
+    .done(function(data) {
+      console.log(data);
+      var reloadHtml = '';
+      data.forEach(function (data) {
+        reloadHtml += insertHtml(data);
+      });
+
+      $('.chat-messages').append(reloadHtml);
+      scrollBottom();
+    })
+  };
+
 });
