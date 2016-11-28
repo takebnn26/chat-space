@@ -8,10 +8,10 @@ class Group < ApplicationRecord
 
 
   def last_message
-    if messages.last.image.blank?
-      messages.present? ? messages.last.content : 'まだメッセージはありません'
+    if messages.last.present?
+      messages.last.image.present? ? '画像を投稿しました' : messages.last.content
     else
-      '画像を投稿しました'
+      'まだメッセージはありません'
     end
   end
 
