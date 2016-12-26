@@ -22,15 +22,20 @@ $(document).on('turbolinks:load', function(){
     } else {
       var insertImage = "";
     };
-    var html = "<li class='chat-message'>" +
-                  "<div class='chat-message__header clearfix'>" +
-                    "<p class='chat-message__name'>" +
-                    data.name + "</p>" +
-                    "<p class='chat-message__time'>" +
-                    data.date + "</p></div>" +
-                  "<p class='chat-message__body'>" +
-                  data.content +
-                  "</p>" + insertImage + "</li>"
+    var html =  "<li class='chat-message'>"                       +
+                  "<div class='chat-message__header clearfix'>"   +
+                    "<p class='chat-message__name'>"              +
+                      data.name                                   +
+                    "</p>"                                        +
+                    "<p class='chat-message__time'>"              +
+                      data.date                                   +
+                    "</p>\
+                  </div>"                                         +
+                  "<p class='chat-message__body'>"                +
+                    data.content                                  +
+                  "</p>"                                          +
+                    insertImage                                   +
+                "</li>"
     return html
   };
 
